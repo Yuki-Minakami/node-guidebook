@@ -1,0 +1,36 @@
+<html>
+    <head>
+            <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <textarea style="width:300px;height:300px"></textarea>
+        <br/>
+        <input type="text"/>
+        <button id="btn">发送</button>
+    </body>
+    <script>
+        const socket = new WebSocket('ws://localhost:3000');
+        //连接成功
+        socket.addEventListener('open',function (event){
+            socket.send("Connected");
+        });
+
+        //监听消息并把来自服务器的消息显示出来
+        socket.addEventListener('message',function (event){
+            $('textarea').val($('textarea').val()+'\n\n' +event.data)
+        });
+
+        $("button").click(function(){
+            //向服务器发送消息
+            var message = $('input').val();
+            socket.send(message);
+            $('textarea').val($('textarea').val()+'\n\n   you : ' +message)
+            
+            //清空输入框
+            $('input').val("");
+        });
+    </script>
+</html>
