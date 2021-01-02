@@ -1,3 +1,5 @@
+// chapter 3
+// 使用class关键字的类继承
 
 class Person {
     constructor(name,age) {

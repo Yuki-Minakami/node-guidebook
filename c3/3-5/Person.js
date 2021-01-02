@@ -1,3 +1,6 @@
+// chapter 3 
+// 基本的类继承
+
 function Person(name,age) {
     this.name  = name;
     this.age = age;
